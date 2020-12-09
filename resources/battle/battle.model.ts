@@ -1,10 +1,6 @@
-const mongoose = require("mongoose");
+import mongoose from 'mongoose';
 
-const connect = () => {
-  return mongoose.connect("mongodb://localhost:27017/battles");
-};
-
-const battle = new mongoose.Schema({
+const battleSchema = new mongoose.Schema({
   name: String,
   year: Number,
   battle_number: Number,
@@ -32,11 +28,6 @@ const battle = new mongoose.Schema({
   note: String,
 });
 
-const Battle = mongoose.model("battle", battle);
+battleSchema.index({ name: 1 }, { unique: true });
 
-connect()
-  .then(async (connection) => {
-    // const battle = await Battle.create({ name: "Battle of Panipat" });
-    console.log("Connection with database established");
-  })
-  .catch((e) => console.error(e));
+export const Battle = mongoose.model('battle', battleSchema);
