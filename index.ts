@@ -3,7 +3,7 @@ import { json, urlencoded } from 'body-parser';
 import morgan from 'morgan';
 import cors from 'cors';
 import connect from './utils/connect';
-import config from './config';
+// import config from './config';
 import battleRouter from './resources/battle/battle.router';
 
 const app = express();
@@ -21,7 +21,7 @@ async function start() {
   try {
     await connect();
     console.log('db connection established');
-    app.listen(config.port, () => {
+    app.listen(process.env.PORT || 3000, () => {
       console.log(`REST API on http://${process.env.HOST}:${process.env.PORT}`);
     });
   } catch (e) {
