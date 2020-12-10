@@ -10,10 +10,9 @@ import config from './config';
 import battleRouter from './resources/battle/battle.router';
 
 const app = express();
-
+require('dotenv').config();
 app.disable('x-powered-by');
-app.use(cors( { origin: 'http://localhost:8080',
-  optionsSuccessStatus: 200 }));
+app.use(cors({ origin: 'http://localhost:8080', optionsSuccessStatus: 200 }));
 app.use(json());
 app.use(urlencoded({ extended: true }));
 app.use(morgan('dev'));

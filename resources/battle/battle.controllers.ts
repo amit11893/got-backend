@@ -22,10 +22,10 @@ async function getCount(req, res) {
 
 async function query(req, res) {
   const query1 = {};
-  const query2 = {};
   let isKing = false;
   if (req.query.king) {
     query1['attacker_king'] = req.query.king;
+    var query2 = {};
     query2['defender_king'] = req.query.king;
     isKing = true;
   }
@@ -48,7 +48,8 @@ async function query(req, res) {
     }
   }
   try {
-    const battles = await Battle.find({ $or: [query1, query2] });
+    console.log('Query: ', query1, query2);
+    const battles = await Battle.find({ $or: [query1] });
     res.status(200).json({ data: battles });
   } catch (e) {
     console.error(e);
