@@ -1,8 +1,7 @@
 import mongoose from 'mongoose';
-import config from '../config';
 
 const connect = () => {
-  return mongoose.connect(config.dburl, {
+  return mongoose.connect(process.env.DB_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
