@@ -3,7 +3,6 @@ import { json, urlencoded } from 'body-parser';
 import morgan from 'morgan';
 import cors from 'cors';
 import connect from './utils/connect';
-// import config from './config';
 import battleRouter from './resources/battle/battle.router';
 
 const app = express();
