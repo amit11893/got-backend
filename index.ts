@@ -9,7 +9,13 @@ const app = express();
 require('dotenv').config();
 
 app.disable('x-powered-by');
-app.use(cors({ origin: process.env.FRONTEND, optionsSuccessStatus: 200 }));
+app.use(
+  cors({
+    origin: process.env.FRONTEND || 'http://localhost:3000',
+    optionsSuccessStatus: 200,
+  })
+);
+app.options('*', cors());
 app.use(json());
 app.use(urlencoded({ extended: true }));
 app.use(morgan('dev'));
@@ -21,7 +27,11 @@ async function start() {
     await connect();
     console.log('db connection established');
     app.listen(process.env.PORT || 3000, () => {
-      console.log(`REST API on http://${process.env.HOST}:${process.env.PORT}`);
+      console.log(
+        `REST API on http://${process.env.HOST || 'localhost'}:${
+          process.env.PORT || 3000
+        }`
+      );
     });
   } catch (e) {
     console.error(e);
