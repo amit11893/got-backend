@@ -6,9 +6,6 @@ import connect from './utils/connect';
 import battleRouter from './resources/battle/battle.router';
 
 const app = express();
-require('dotenv').config();
-
-app.disable('x-powered-by');
 app.use(
   cors({
     origin: process.env.FRONTEND || 'http://localhost:3000',
@@ -16,6 +13,18 @@ app.use(
   })
 );
 app.options('*', cors());
+app.use(function (req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'DELETE, PUT, GET, POST');
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept'
+  );
+  next();
+});
+require('dotenv').config();
+
+app.disable('x-powered-by');
 app.use(json());
 app.use(urlencoded({ extended: true }));
 app.use(morgan('dev'));
