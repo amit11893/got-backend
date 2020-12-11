@@ -28,6 +28,9 @@ const battleSchema = new mongoose.Schema({
   note: String,
 });
 
-battleSchema.index({ name: 1 }, { unique: true });
+battleSchema.index(
+  { location: 1, defender_king: 1, attacker_king: 1 },
+  { unique: true }
+);
 
 export const Battle = mongoose.model('battle', battleSchema);
